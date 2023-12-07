@@ -2,6 +2,21 @@ export ZOPEN_STABLE_URL="git@github.com:IBM/IBM-Z-zOS.git"
 export ZOPEN_STABLE_DEPS="make"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="development"
+export ZOPEN_COPM="clang"
+export ZOPEN_CONFIGURE="skip"
+
+export ZOPEN_MAKE="zopen_build_all"
+
+
+zopen_build_all()
+{
+  cd zOS-Tools-and-Toys/sparse
+  make -j$ZOPEN_NUM_JOBS clean all
+  if [ $? -gt 0 ]; then
+    return 4;
+  fi
+  cd -
+}
 
 zopen_check_results()
 {
