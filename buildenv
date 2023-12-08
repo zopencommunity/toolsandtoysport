@@ -4,18 +4,26 @@ export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="development"
 export ZOPEN_COMP="clang"
 export ZOPEN_CONFIGURE="skip"
+export ZOPEN_CHECK="zopen_check"
 
 export ZOPEN_MAKE="zopen_build_all"
 
 zopen_build_all()
 {
   cd zOS-Tools-and-Toys/sparse
-  make -j$ZOPEN_NUM_JOBS clean all
+  make -j$ZOPEN_NUM_JOBS
   if [ $? -gt 0 ]; then
     return 4;
   fi
   cd -
 }
+
+zopen_check()
+{
+  zOS-Tools-and-Toys/sparse/sparse -V
+  # Nothing to check at this time
+}
+
 
 zopen_check_results()
 {
